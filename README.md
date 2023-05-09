@@ -1,6 +1,6 @@
 # CS-2023-Mock
  My annotated code for the AS 2023 Skeleton Program
-###### Instruction Format
+### Instruction Format
 If a scenario comes up in which you are asked to write a custom line of assembly code, or an entire program, it is useful to understand how the program reads lines and how your code should be formatted. For an instruction to be "valid" (i.e., it does not cause any errors when assembled and run), it must have the following qualities:
 1. The instruction itself must start 7 characters from the beginning of the line, and must be written in all caps. This ensures that the different parts of an instruction are identified correctly.
 2. The opcode instruction must be a member of the opCodeValues array. This ensures that the opcode is a valid instruction that is in the instruction set. The instruction set consists of  "LDA", "STA", "LDA#", "HLT", "ADD", "JMP", "SUB", "CMP#", "BEQ", "SKP", "JSR", "RTN" and "   ". A hashtag (#) appended to the end of an opcode indicates that the value should be treated as a numerical value, as opposed to a memory location
