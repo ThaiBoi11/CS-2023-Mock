@@ -242,7 +242,8 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     DO THIS LATER
+        ///     "Extracts the opcode" from an AssemblerInstruction struct by taking two substrings off the instruction; one for the initial opcode, the other to check if the value 
+        ///     should be treated as a memory address or a decimal numerical.
         /// </summary>
         /// <param name="instruction"></param>
         /// <param name="lineNumber"></param>
@@ -252,10 +253,10 @@ namespace AssemblerSimulator
             if (instruction.Length > 9)
             {
                 string[] opCodeValues = new string[] { "LDA", "STA", "LDA#", "HLT", "ADD", "JMP", "SUB", "CMP#", "BEQ", "SKP", "JSR", "RTN", "   " };
-                string operation = instruction.Substring(7, 3);
+                string operation = instruction.Substring(7, 3); //7 spaces away from left margin, reads 3 characters
                 if (instruction.Length > 10)
                 {
-                    string addressMode = instruction.Substring(10, 1);
+                    string addressMode = instruction.Substring(10, 1); //10 characters away from left margin, reads next character 
 
                     if (addressMode == "#")
                     {
