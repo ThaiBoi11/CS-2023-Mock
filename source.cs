@@ -258,12 +258,12 @@ namespace AssemblerSimulator
                 {
                     string addressMode = instruction.Substring(10, 1); //10 characters away from left margin, reads next character 
 
-                    if (addressMode == "#")
+                    if (addressMode == "#") //Checks to see if the operand should be treated as a decimal numerical or a memory address
                     {
                         operation += addressMode;
                     }
                 }
-                if (opCodeValues.Contains(operation))
+                if (opCodeValues.Contains(operation)) //Checks for valid instruction
                 {
                     memory[lineNumber].opCode = operation;
                 }
@@ -279,20 +279,22 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     DO THIS LATER
+        ///     "Extracts the operand" by reading everything past the first 13 characters and then 
+        ///     writing that to the operandString in the respective AssemblerInstruction struct.
         /// </summary>
         /// <param name="instruction"></param>
         /// <param name="lineNumber"></param>
         /// <param name="memory"></param>
         private static void ExtractOperand(string instruction, int lineNumber, AssemblerInstruction[] memory)
         {
-            if (instruction.Length >= 13)
+            if (instruction.Length >= 13) // 7 spaces + 3/4 chars for opcode + 2 spaces + x chars for 
+                                          // operand means any valid instruction will be at least 13 characters
             {
-                string operand = instruction.Substring(12);
+                string operand = instruction.Substring(12); // Starts reading from the 13th character (i.e., where the operand will be)
                 int thisPosition = -1;
                 for (int position = 0; position < operand.Length; position++)
                 {
-                    if (operand[position] == '*')
+                    if (operand[position] == '*') // Checks for comment
                     {
                         thisPosition = position;
                     }
@@ -301,7 +303,7 @@ namespace AssemblerSimulator
                 {
                     operand = operand.Substring(0, thisPosition);
                 }
-                operand = operand.Trim();
+                operand = operand.Trim(); //the string.Trim method removes empty space at the beginning and end of a string
                 memory[lineNumber].operandString = operand;
             }
         }
