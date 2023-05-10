@@ -309,7 +309,7 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     DO THIS LATER
+        ///     Runs through the ExtractX methods for each line in the program.
         /// </summary>
         /// <param name="sourceCode"></param>
         /// <param name="memory"></param>
@@ -362,7 +362,7 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     DO THIS LATER
+        ///     Displays the memory location on the console
         /// </summary>
         /// <param name="memory"></param>
         /// <param name="location"></param>
@@ -372,7 +372,7 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     DO THIS LATER
+        ///     Displays the current source code line on the console
         /// </summary>
         /// <param name="sourceCode"></param>
         /// <param name="location"></param>
@@ -766,7 +766,7 @@ namespace AssemblerSimulator
                     case 'D':
                         if (sourceCode[0] == EMPTY_STRING)
                         {
-                            Console.WriteLine("Error Code 7");
+                            Console.WriteLine("Error Code 7"); // Error code given when there is no source code to be displayed
                         }
                         else
                         {
@@ -776,7 +776,7 @@ namespace AssemblerSimulator
                     case 'E':
                         if (sourceCode[0] == EMPTY_STRING)
                         {
-                            Console.WriteLine("Error Code 8");
+                            Console.WriteLine("Error Code 8"); // Error code given when there is no source code to be edited
                         }
                         else
                         {
@@ -799,9 +799,9 @@ namespace AssemblerSimulator
                         {
                             Console.WriteLine("Error Code 10"); // Error code given when there is no code to be run
                         }
-                        else if (memory[0].opCode == "ERR")
+                        else if (memory[0].opCode == "ERR") 
                         {
-                            Console.WriteLine("Error Code 11");
+                            Console.WriteLine("Error Code 11"); // Error code given when something else happened along the way
                         }
                         else
                         {
