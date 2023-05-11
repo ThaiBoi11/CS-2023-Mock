@@ -450,7 +450,7 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     Converts a string of 0s and 1s into an integer number, using the Convert.Int32 method on each indivudual character
+        ///     Converts a string of 0s and 1s into an integer number, using the Convert.Int32 method on each individual character
         ///     along with a "reverse modulo" operation
         /// </summary>
         /// <param name="binaryString">A string of 0s and 1s</param>

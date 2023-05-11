@@ -1,5 +1,7 @@
 # CS-2023-Mock
- My annotated code for the AS 2023 Skeleton Program
+My annotated code for the AS 2023 Skeleton Program
+#### Introduction
+This is a copy of the source code for the AQA AS Computer Science qualification, for the AS examination in 2023. This copy has been annotated with my own comments, so that I can understand what different methods do and how they do their actions without having to re-read the code every time. This copy of the code is for my own purposes, but feel free to review it if you are either doing the paper in the upcoming week, or are doing the paper for revision in the future. 
 #### AssemblerInstruction Struct
 A struct(ure), in its simplest form, is a way of "packaging" different types to create a custom type. In the case of AssemblerInstruction, it "packages" 2 strings called opCode and operandString, and an integer called operandValue. This struct is then used to create an array of AssemblerInstructions, resulting in the memory that is referenced throughout the program. 
 #### Instruction Format
