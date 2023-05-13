@@ -353,7 +353,7 @@ namespace AssemblerSimulator
                         }
                         catch (Exception)
                         {
-                            Console.WriteLine("Error Code 6");
+                            Console.WriteLine("Error Code 6"); 
                             memory[0].opCode = "ERR";
                         }
                     }
