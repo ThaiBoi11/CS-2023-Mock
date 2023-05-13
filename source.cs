@@ -508,25 +508,25 @@ namespace AssemblerSimulator
         private static void SetFlags(int value, int[] registers)
         {
             if (value == 0)
-            {
+            { // Zero flag triggered                 "ZNV"
                 registers[STATUS] = ConvertToDecimal("100");
             }
             else if (value < 0)
-            {
+            { // Negative flag triggered             "ZNV"
                 registers[STATUS] = ConvertToDecimal("010");
             }
             else if (value > MAX_INT || value < -(MAX_INT + 1))
-            {
+            { // Overflow flag triggered             "ZNV"    (the value is either bigger than 127 or smaller than -128)
                 registers[STATUS] = ConvertToDecimal("001");
             }
             else
-            {
+            { // No flags are triggered              "ZNV"
                 registers[STATUS] = ConvertToDecimal("000");
             }
         }
 
         /// <summary>
-        ///     Reports whenever there is an overflow error (i.e. the value in the error register is "1").
+        ///     Reports whenever there is an error, but the only type of error ever introduced is an overflow error(i.e. the value in the error register is "1").
         /// </summary>
         /// <param name="errorMessage"></param>
         /// <param name="registers"></param>
@@ -668,14 +668,14 @@ namespace AssemblerSimulator
         }
 
         /// <summary>
-        ///     "Jumps (to the) subroutine" by setting the 
+        ///     "Jumps (to the) subroutine" by setting idk check messages w/ Navya
         /// </summary>
         /// <param name="memory"></param>
         /// <param name="registers"></param>
         /// <param name="address"></param>
         private static void ExecuteJSR(AssemblerInstruction[] memory, int[] registers, int address)
         {
-            int stackPointer = registers[TOS] - 1;
+            int stackPointer = registers[TOS] - 1; 
             memory[stackPointer].operandValue = registers[PC];
             registers[PC] = address;
             registers[TOS] = stackPointer;
