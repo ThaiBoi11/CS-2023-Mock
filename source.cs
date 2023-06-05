@@ -149,8 +149,8 @@ namespace AssemblerSimulator
                 }
                 else
                 {
-                    Console.WriteLine("Error Code 2"); // The error code for the file not being able to be read (maybe)
-                    sourceCode[0] = (lineNumber - 1).ToString();
+                    Console.WriteLine("Error Code 2"); // The error code for either an IOException or an OutOfMemoryException.
+                    sourceCode[0] = (lineNumber - 1).ToString(); // Sets the numberOfLines variable to -1, although there are no repercussions to this AFAIK.
                 }
             }
             if (lineNumber > 0)
@@ -757,7 +757,7 @@ namespace AssemblerSimulator
             {
                 DisplayMenu();
                 menuOption = GetMenuOption();
-                switch (menuOption) //Switch for figuring out what menu option the user picked
+                switch (menuOption) // Switch for figuring out what menu option the user picked
                 {
                     case 'L':
                         LoadFile(sourceCode);
