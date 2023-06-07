@@ -252,7 +252,7 @@ namespace AssemblerSimulator
         {
             if (instruction.Length > 9)
             {
-                string[] opCodeValues = new string[] { "LDA", "STA", "LDA#", "HLT", "ADD", "JMP", "SUB", "LSL", "CMP#", "BEQ", "SKP", "JSR", "RTN", "   " };
+                string[] opCodeValues = new string[] { "LDA", "STA", "LDA#", "HLT", "ADD", "JMP", "SUB", "LSL", "LSR", "CMP#", "BEQ", "SKP", "JSR", "RTN", "   " };
                 string operation = instruction.Substring(7, 3); //7 spaces away from left margin, reads 3 characters
                 if (instruction.Length > 10)
                 {
@@ -605,12 +605,25 @@ namespace AssemblerSimulator
             }
         }
         /// <summary>
-        ///     Custom logical left shift command by doubling the value in the accumulator n times, 
-        ///     where n is the number stored in memory[address].operandValue
+        ///     Custom logical left shift command by using the "<<" operator, which performs a bitwise left shift 
+        ///     n times, where n is the value stored in memory[address].operandValue
         /// </summary>
         /// <param name="registers"></param>
         private static void ExecuteLSL(AssemblerInstruction[] memory, int[] registers, int address) {
-            registers[ACC] = registers[ACC] * Convert.ToInt32(Math.Pow(2, memory[address].operandValue));
+            registers[ACC] = registers[ACC] << memory[address].operandValue;
+            SetFlags(registers[ACC], registers);
+            if (registers[STATUS] == ConvertToDecimal("001")) {
+                ReportRunTimeError("Overflow", registers);
+            }
+        }
+        /// <summary>
+        ///     Same as LSL, but other way around
+        /// </summary>
+        /// <param name="memory"></param>
+        /// <param name="registers"></param>
+        /// <param name="address"></param>
+        private static void ExecuteLSR(AssemblerInstruction[] memory, int[] registers, int address) {
+            registers[ACC] = registers[ACC] << memory[address].operandValue;
             SetFlags(registers[ACC], registers);
             if (registers[STATUS] == ConvertToDecimal("001")) {
                 ReportRunTimeError("Overflow", registers);
@@ -741,6 +754,8 @@ namespace AssemblerSimulator
                         ExecuteSUB(memory, registers, operand); break;
                     case "LSL": 
                         ExecuteLSL(memory, registers, operand); break;
+                    case "LSR":
+                        ExecuteLSR(memory, registers, operand); break;
                     case "SKP":
                         ExecuteSKP(); break;
                     case "RTN":
