@@ -258,12 +258,12 @@ namespace AssemblerSimulator
                 {
                     string addressMode = instruction.Substring(10, 1); //10 characters away from left margin, reads next character 
 
-                    if (addressMode == "#") //Checks to see if the operand should be treated as a decimal numerical or a memory address
+                    if (addressMode == "#") // Checks to see if the operand should be treated as a decimal numerical or a memory address
                     {
                         operation += addressMode;
                     }
                 }
-                if (opCodeValues.Contains(operation)) //Checks for valid instruction
+                if (opCodeValues.Contains(operation)) // Checks for valid instruction
                 {
                     memory[lineNumber].opCode = operation;
                 }
@@ -605,19 +605,12 @@ namespace AssemblerSimulator
             }
         }
         /// <summary>
-        ///     Just subtracts 1 so far; not currently working
+        ///     Custom logical left shift command by doubling the value in the accumulator n times, 
+        ///     where n is the number stored in memory[address].operandValue
         /// </summary>
         /// <param name="registers"></param>
-        private static void ExecuteLSL(int[] registers) {
-            string binaryNumber = ConvertToBinary(registers[ACC]);
-            List<char> list = new List<char>();
-            foreach (char c in binaryNumber) {
-                list.Add(c);
-            }
-            list.RemoveAt(0);
-            list.Add(0);
-            binaryNumber = new string(list.ToArray());
-            registers[ACC] = ConvertToDecimal(binaryNumber);
+        private static void ExecuteLSL(AssemblerInstruction[] memory, int[] registers, int address) {
+            registers[ACC] = registers[ACC] * Convert.ToInt32(Math.Pow(2, memory[address].operandValue));
             SetFlags(registers[ACC], registers);
             if (registers[STATUS] == ConvertToDecimal("001")) {
                 ReportRunTimeError("Overflow", registers);
@@ -747,7 +740,7 @@ namespace AssemblerSimulator
                     case "SUB":
                         ExecuteSUB(memory, registers, operand); break;
                     case "LSL": 
-                        ExecuteLSL(registers); break;
+                        ExecuteLSL(memory, registers, operand); break;
                     case "SKP":
                         ExecuteSKP(); break;
                     case "RTN":
